@@ -15,6 +15,10 @@
     nixos-modules = map mylib.relativeToRoot [
       # common
       "modules/core"
+      "modules/virtualization"
+      "modules/hyprland"
+      "modules/desktop"
+      "modules/gaming"
       # host specific
       "hosts/ronaldinhosoccer"
     ];

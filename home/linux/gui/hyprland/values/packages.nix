@@ -24,6 +24,7 @@
     bitwarden-cli
     parsec-bin
 
+    protonup-qt
     telegram-desktop
     kdePackages.kdeconnect-kde
     electron-mail

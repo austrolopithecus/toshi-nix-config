@@ -13,9 +13,13 @@
   ];
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ehci_pci" "nvme" "usb_storage" "usbhid" "sd_mod"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel"];
-  boot.extraModulePackages = [];
+  boot.initrd.kernelModules = [
+    "vfio_pci"
+    "vfio"
+    "vfio_iommu_type1"
+  ];
+  boot.kernelModules = ["kvm-intel" "v4l2loopback"];
+  boot.extraModulePackages = [pkgs.linuxPackages.v4l2loopback];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/d56336a7-79ed-4b73-8f59-a8a9b22fc676";
@@ -62,5 +66,6 @@
   # networking.interfaces.enp7s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

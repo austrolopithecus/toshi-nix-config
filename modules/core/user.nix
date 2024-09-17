@@ -1,9 +1,7 @@
-{ pkgs, ... }: {
-  users.users.lin = {
+{pkgs, ...}: {
+  users.users.toshi = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel" "libvirtd"]; # Enable ‘sudo’ for the user.
     shell = pkgs.nushell;
   };
-
-
 }
