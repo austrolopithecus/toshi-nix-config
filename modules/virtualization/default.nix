@@ -3,25 +3,22 @@
   pkgs,
   ...
 }: {
-  # Pacotes instalados no sistema
-  environment.systemPackages = with pkgs; [
-    virt-manager
-    qemu_kvm
-    qemu
-    ovmf # Nome correto do pacote OVMF
-  ];
-
-  # Habilita o libvirtd
   virtualisation.libvirtd = {
     enable = true;
-    group = "libvirtd"; # Permite usuários no grupo 'libvirtd' usarem o serviço
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+      ovmf = {
+        enable = true;
+        packages = [
+          (pkgs.OVMF.override {
+            secureBoot = true;
+            tpmSupport = true;
+          })
+          .fd
+        ];
+      };
+    };
   };
-
-  # Habilita QEMU/KVM com rede padrão
-  virtualisation.qemu = {
-    enable = true;
-    defaultNetwork = true;
-  };
-
-  # Outras configurações...
 }

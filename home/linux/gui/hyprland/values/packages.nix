@@ -26,6 +26,7 @@
 
     protonup-qt
     telegram-desktop
+    virt-manager
     kdePackages.kdeconnect-kde
     electron-mail
     obsidian
